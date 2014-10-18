@@ -37,9 +37,14 @@
         <text>Welche%20Gattung%20geh%F6rt%20nicht%20zu%20den%20S%E4ugetieren%3F</text>
       </controlProperties>
     </control>
-    <control controlID="18" controlTypeID="com.balsamiq.mockups::Button" x="443" y="532" w="-1" h="-1" measuredW="48" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::RoundButton" x="459" y="304" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Hilfe</text>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Label" x="459" y="310" w="-1" h="-1" measuredW="32" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Men%FC</text>
       </controlProperties>
     </control>
   </controls>
