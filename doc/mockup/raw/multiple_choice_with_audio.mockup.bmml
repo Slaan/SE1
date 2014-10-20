@@ -15,9 +15,9 @@
         <text>%DCberspringen</text>
       </controlProperties>
     </control>
-    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="389" y="655" w="102" h="27" measuredW="67" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="389" y="655" w="102" h="27" measuredW="85" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>L%F6sung</text>
+        <text>Abbrechen</text>
       </controlProperties>
     </control>
     <control controlID="11" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="281" y="459" w="210" h="111" measuredW="125" measuredH="111" zOrder="4" locked="false" isInGroup="-1">
@@ -46,6 +46,11 @@
     <control controlID="21" controlTypeID="com.balsamiq.mockups::Label" x="459" y="310" w="-1" h="-1" measuredW="32" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Men%FC</text>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Link" x="325" y="311" w="-1" h="-1" measuredW="43" measuredH="19" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Melden</text>
       </controlProperties>
     </control>
   </controls>
