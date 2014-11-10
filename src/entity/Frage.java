@@ -2,21 +2,21 @@ package entity;
 
 import java.util.Set;
 
-import exceptions.EmptyQuestionException;
-import exceptions.InvalidAmountOfAnswersException;
-import exceptions.NoCorrectAnswerExistsException;
+import exceptions.LeereFrageException;
+import exceptions.UngueltigeAnwortAnzahlException;
+import exceptions.KeineKorrekteAntwortVorhandenException;
 
-public class Question {
+public class Frage {
 
 	private Integer			  _question_id;
 	private	Integer			  _group_id;
 	private	String			  _question_text;
-	private	Set<AnswerOption> _answer_options;
+	private	Set<AntwortMoeglichkeit> _answer_options;
 	private String			  _information_text;
 	
-	public Question() throws InvalidAmountOfAnswersException, 
-							 NoCorrectAnswerExistsException, 
-							 EmptyQuestionException {
+	public Frage() throws UngueltigeAnwortAnzahlException, 
+							 KeineKorrekteAntwortVorhandenException, 
+							 LeereFrageException {
 		_question_id = UniqueID.getUniqueId();
 		
 		isValid();
@@ -27,23 +27,23 @@ public class Question {
 	 * Checks that the question text is not empty, the 
 	 * given answers are at least one correct and that
 	 * there are four answers.
-	 * @throws InvalidAmountOfAnswersException 
-	 * @throws NoCorrectAnswerExistsException 
-	 * @throws EmptyQuestionException 
+	 * @throws UngueltigeAnwortAnzahlException 
+	 * @throws KeineKorrekteAntwortVorhandenException 
+	 * @throws LeereFrageException 
 	 */
-	private void isValid() throws 	InvalidAmountOfAnswersException, 
-									NoCorrectAnswerExistsException, 
-									EmptyQuestionException {
-		if(_answer_options.size() != 4) throw new InvalidAmountOfAnswersException();
+	private void isValid() throws 	UngueltigeAnwortAnzahlException, 
+									KeineKorrekteAntwortVorhandenException, 
+									LeereFrageException {
+		if(_answer_options.size() != 4) throw new UngueltigeAnwortAnzahlException();
 		// check that there is at least one
 		// correct answer
 		boolean accu = false;
-		for(AnswerOption answer : _answer_options) {
+		for(AntwortMoeglichkeit answer : _answer_options) {
 				accu = accu || answer.isCorrect();
 		}
-		if(!accu) throw new NoCorrectAnswerExistsException();
+		if(!accu) throw new KeineKorrekteAntwortVorhandenException();
 		// check questiontext
-		if(_answer_options.isEmpty()) throw new EmptyQuestionException();
+		if(_answer_options.isEmpty()) throw new LeereFrageException();
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class Question {
 	 * 
 	 * @return
 	 */
-	public Set<AnswerOption> getAnswerOptions() {
+	public Set<AntwortMoeglichkeit> getAnswerOptions() {
 		return _answer_options;
 	}
 	
@@ -82,10 +82,10 @@ public class Question {
 	public boolean equals(Object obj) {
 		if(obj == this) {
 			return true;
-		} else if(!(obj instanceof Question)) {
+		} else if(!(obj instanceof Frage)) {
 			return false;
 		} else {
-			Question other = (Question) obj;
+			Frage other = (Frage) obj;
 			boolean a = _answer_options.equals(other.getAnswerOptions())
 					 && _information_text.equals(other.getInformationText())
 					 && _question_id.equals(other.getQuestionID())

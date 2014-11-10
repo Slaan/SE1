@@ -1,8 +1,12 @@
 package entity;
 
-public class UniqueID {
+public final class UniqueID {
 	
 	private static int __highest_id = 0; 
+	
+	private UniqueID() {
+		// nop
+	}
 	
 	/**
 	 * 

@@ -1,6 +1,6 @@
 package entity;
 
-import exceptions.InvalidEmailException;
+import exceptions.UngueltigeEmailException;
 
 public class Email {
 
@@ -9,14 +9,14 @@ public class Email {
 	/**
 	 * Constructor
 	 * @param address of valid address
-	 * @throws InvalidEmailException when email has not valid format.
+	 * @throws UngueltigeEmailException when email has not valid format.
 	 */
-	public Email(String address) throws InvalidEmailException {
+	public Email(String address) throws UngueltigeEmailException {
 		if(address == null) throw new IllegalArgumentException();
 		if(!isValid(address)) {
 			String err_msg =  "Given email does not fit "
 							+ "the commun norm.";
-			throw new InvalidEmailException(err_msg);
+			throw new UngueltigeEmailException(err_msg);
 		}
 		_address = address;
 	}
@@ -24,14 +24,14 @@ public class Email {
 	/**
 	 * Copy constructor
 	 * @param address
-	 * @throws InvalidEmailException
+	 * @throws UngueltigeEmailException
 	 */
-	public Email(Email address) throws InvalidEmailException {
+	public Email(Email address) throws UngueltigeEmailException {
 		if(address == null) throw new IllegalArgumentException();
 		if(!isValid(address.getAddress())) {
 			String err_msg =  "Given email does not fit "
 							+ "the commun norm.";
-			throw new InvalidEmailException(err_msg);
+			throw new UngueltigeEmailException(err_msg);
 		}
 		_address = address.getAddress();
 	}
