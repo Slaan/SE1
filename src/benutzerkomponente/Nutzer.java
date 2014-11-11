@@ -1,20 +1,23 @@
-package entity;
+package benutzerkomponente;
 
 import java.security.KeyStore.PasswordProtection;
+
+import simple_typen.EmailTyp;
+import simple_typen.UniqueID;
 
 public class Nutzer {
 
 	private Integer 	_id;
 	private String		_nickname;
 	private	String 		_password; // password plain?
-	private Email 		_email;
+	private EmailTyp 		_email;
 	
 	/**
 	 * Create user (A1)
 	 * @param nickname is the name of user
 	 * @param email of the user.
 	 */
-	public Nutzer(String nickname, String password, Email email) {
+	public Nutzer(String nickname, String password, EmailTyp email) {
 		if(nickname == null) throw new IllegalArgumentException("Nickname is null.");
 		if(password == null) throw new IllegalArgumentException("Password is null");
 		if(email == null) throw new IllegalArgumentException("Email is null.");
@@ -42,7 +45,7 @@ public class Nutzer {
 	 * 
 	 * @return email address of user
 	 */
-	public Email getEmail() {
+	public EmailTyp getEmail() {
 		return _email;
 	}
 	

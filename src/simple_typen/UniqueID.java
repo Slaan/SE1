@@ -1,4 +1,4 @@
-package entity;
+package simple_typen;
 
 public final class UniqueID {
 	
