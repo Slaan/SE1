@@ -5,7 +5,7 @@ import exceptions.KeineAnfrageVorhandenException;
 import exceptions.KeineRechteException;
 import fragekomponente.Frage;
 
-public interface IGruppenKomponente {
+public interface IGruppenkomponenteServices {
 	
 	/**
 	 * Nutzer tritt mittels Passwort einer Gruppe bei (A13)

@@ -1,14 +1,14 @@
 package component;
 
-import component_interface.IBenutzerKomponente;
-import component_interface.IFrageKomponente;
-import component_interface.IGruppenKomponente;
+import component_interface.IBenutzerKomponenteServices;
+import component_interface.IFrageKomponenteServices;
+import component_interface.IGruppenkomponenteServices;
 import component_interface.IPersistenceServices;
 
 public class main {
 	
 	IPersistenceServices ips = null; // TODO implement me
-	IGruppenKomponente igk = new GruppenKomponente(ips);
-	IFrageKomponente ifk = new FrageKomponente(ips,igk);
-	IBenutzerKomponente ibk = new BenutzerKomponente(ips,ifk,igk);
+	IFrageKomponenteServices ifks = new FrageKomponente(ips);
+	IBenutzerKomponenteServices ibks = new BenutzerKomponente(ips,ifks);
+	IGruppenkomponenteServices igks = new GruppenKomponente(ips,ifks,ibks);
 }

@@ -1,17 +1,15 @@
 package component;
 
-import component_interface.IBenutzerKomponente;
-import component_interface.IFrageKomponente;
-import component_interface.IGruppenKomponente;
+import component_interface.IFrageKomponenteServices;
+import component_interface.IGruppenkomponenteServices;
 import component_interface.IPersistenceServices;
 
-public class FrageKomponente implements IFrageKomponente  {
+public class FrageKomponente implements IFrageKomponenteServices  {
 	
-	private IGruppenKomponente					_igk;
-	private IPersistenceServices 				_ips;
+	private IGruppenkomponenteServices					_igk;
+	private IPersistenceServices 						_ips;
 
-	public FrageKomponente(IPersistenceServices ips, IGruppenKomponente igk) {
-		_igk = igk;
+	public FrageKomponente(IPersistenceServices ips) {
 		_ips = ips;
 	}
 }

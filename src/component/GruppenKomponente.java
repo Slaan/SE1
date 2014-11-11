@@ -1,22 +1,24 @@
 package component;
 
-import component_interface.IBenutzerKomponente;
-import component_interface.IFrageKomponente;
-import component_interface.IGruppenKomponente;
+import benutzerkomponente.Nutzer;
+import component_interface.IBenutzerKomponenteServices;
+import component_interface.IFrageKomponenteServices;
+import component_interface.IGruppenkomponenteServices;
 import component_interface.IPersistenceServices;
-
-import entity.Frage;
-import entity.Nutzer;
 import exceptions.KeineAnfrageVorhandenException;
 import exceptions.KeineRechteException;
+import fragekomponente.Frage;
 
-public class GruppenKomponente implements IGruppenKomponente{
+public class GruppenKomponente implements IGruppenkomponenteServices{
 	
 	private IPersistenceServices 				_ips;
-	
+	private IFrageKomponenteServices			_ifks;
+	private IBenutzerKomponenteServices			_ibks;
 
-	public GruppenKomponente(IPersistenceServices ips) {
+	public GruppenKomponente(IPersistenceServices ips, IFrageKomponenteServices ifks, IBenutzerKomponenteServices ibks) {
 		_ips = ips;
+		_ifks = ifks;
+		_ibks = ibks;
 	}
 	
 	@Override
