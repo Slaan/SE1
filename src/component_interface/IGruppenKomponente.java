@@ -1,13 +1,11 @@
-package entity_interface;
+package component_interface;
 
 import entity.Frage;
 import entity.Nutzer;
 import exceptions.KeineAnfrageVorhandenException;
 import exceptions.KeineRechteException;
 
-public interface Group {
-
-	public void erstelleMitgliedsAnfrage(Nutzer neues);
+public interface IGruppenKomponente {
 	
 	/**
 	 * Nutzer tritt mittels Passwort einer Gruppe bei (A13)
@@ -52,5 +50,5 @@ public interface Group {
 	 * @throws KeineRechteException falls der nutzer nicht zur gruppe gehoert
 	 */
 	public void fuegeFrageHinzu(Nutzer nutzer, Frage frage) throws KeineRechteException;	
-	
+
 }

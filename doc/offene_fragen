@@ -1,9 +1,10 @@
-Komponenten Beziehung zwischen der Gruppe und den Fragen ist unklar. Dies faellt uns sehr schwer.
-- warum sind die komponenenten in "implementierung (entitaeten, dt, komponenten, ...)" nicht miteinander
-  verbunden?
+-Komponenten Beziehung zwischen der Gruppe und den Fragen ist unklar. Dies faellt uns sehr schwer.
+- warum sind die komponenenten in "implementierung (entitaeten, dt, komponenten, ...)" nicht miteinander verbunden?"
+
 
 - moderator rausgenommen
 - email mit javas internetaddress ersetzt
 - unique id eingefuegt, da wir nicht wussten wie wir das mit der id umsetzen sollten
 - gibt es eine moeglichkeit passwoerter nicht plain zu speichern?
 
+sollen moderatoren zuvor mitglied der gruppe sein?

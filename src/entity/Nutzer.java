@@ -2,7 +2,7 @@ package entity;
 
 import java.security.KeyStore.PasswordProtection;
 
-public class User {
+public class Nutzer {
 
 	private Integer 	_id;
 	private String		_nickname;
@@ -14,7 +14,7 @@ public class User {
 	 * @param nickname is the name of user
 	 * @param email of the user.
 	 */
-	public User(String nickname, String password, Email email) {
+	public Nutzer(String nickname, String password, Email email) {
 		if(nickname == null) throw new IllegalArgumentException("Nickname is null.");
 		if(password == null) throw new IllegalArgumentException("Password is null");
 		if(email == null) throw new IllegalArgumentException("Email is null.");
@@ -50,10 +50,10 @@ public class User {
 	public boolean equals(Object obj) {
 		if(this == obj) {
 			return true;
-		} else if(!(obj instanceof User)) {
+		} else if(!(obj instanceof Nutzer)) {
 			return false;
 		} else {
-			User other = (User) obj;
+			Nutzer other = (Nutzer) obj;
 			return 	_id.equals(other.getUserID())
 			&&	   	_nickname.equals(other.getNickname())
 			&&		_email.equals(other.getEmail());

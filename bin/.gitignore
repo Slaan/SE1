@@ -4,3 +4,5 @@
 /entity_interface/
 /component/
 /exceptions/
+/component_interface/
+/main.class
