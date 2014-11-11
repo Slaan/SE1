@@ -13,7 +13,7 @@ public interface IGruppenKomponente {
 	 * @param passwort welches dem gruppen passwort abgeglichen wird.
 	 * @return true wenn das passwort richtig war und neues als Mitglied eingetragen wurde.
 	 */
-	public boolean tretteGruppeMitPasswortBei(Nutzer neues, String passwort);
+	public boolean treteGruppeMitPasswortBei(Nutzer neues, String passwort);
 
 	/**
 	 * Bestaetigt eine bereits erstellte Mitgliedsanfrage eines Nutzers  
