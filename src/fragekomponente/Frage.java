@@ -1,49 +1,66 @@
-package entity;
+package fragekomponente;
 
 import java.util.Set;
 
-import exceptions.LeereFrageException;
+import simple_typen.UniqueID;
+import exceptions.LeereFragenException;
 import exceptions.UngueltigeAnwortAnzahlException;
 import exceptions.KeineKorrekteAntwortVorhandenException;
 
+/**
+ * 
+ * @author Alex Mantel, Daniel Hofmeister; Praktikumsgruppe 2
+ *
+ */
 public class Frage {
 
-	private Integer			  _question_id;
-	private	Integer			  _group_id;
-	private	String			  _question_text;
-	private	Set<AntwortMoeglichkeit> _answer_options;
-	private String			  _information_text;
+	private Integer			  			_question_id;
+	private	Integer			  			_group_id;
+	private	String			  			_question_text;
+	private	Set<AntwortMoeglichkeit> 	_answer_options;
+	private String			 		  	_information_text;
 	
-	public Frage() throws UngueltigeAnwortAnzahlException, 
+	public Frage(Integer groupid, Set<AntwortMoeglichkeit> answer_option, String frage_text) throws 
+							 UngueltigeAnwortAnzahlException, 
 							 KeineKorrekteAntwortVorhandenException, 
-							 LeereFrageException {
+							 LeereFragenException {
+		if(groupid == null) throw new NullPointerException();
+		if(answer_option == null) throw new NullPointerException();
+		if(frage_text == null) throw new NullPointerException();
 		_question_id = UniqueID.getUniqueId();
 		
 		isValid();
 	}
 	
 	/**
-	 * Specification of Question (Glossar)
-	 * Checks that the question text is not empty, the 
-	 * given answers are at least one correct and that
-	 * there are four answers.
+	 * Ueberprueft ob vier Fragen vorhanden sind, (Glossar)
+	 * mindestens eine von diesen korrekt ist
+	 * @throws LeereFragenException 
 	 * @throws UngueltigeAnwortAnzahlException 
 	 * @throws KeineKorrekteAntwortVorhandenException 
-	 * @throws LeereFrageException 
 	 */
 	private void isValid() throws 	UngueltigeAnwortAnzahlException, 
 									KeineKorrekteAntwortVorhandenException, 
-									LeereFrageException {
+									LeereFragenException {
+		if(_answer_options.isEmpty()) throw new LeereFragenException();
 		if(_answer_options.size() != 4) throw new UngueltigeAnwortAnzahlException();
 		// check that there is at least one
 		// correct answer
 		boolean accu = false;
 		for(AntwortMoeglichkeit answer : _answer_options) {
-				accu = accu || answer.isCorrect();
+				accu = accu || answer.istRichtig();
 		}
 		if(!accu) throw new KeineKorrekteAntwortVorhandenException();
 		// check questiontext
-		if(_answer_options.isEmpty()) throw new LeereFrageException();
+	}
+	
+	/**
+	 * Setze neue Hintergrundinformation fuer die Frage
+	 * @param info 
+	 */
+	public void setzeInformationsText(String info) {
+		if(info == null) throw new IllegalArgumentException("Information ist null");
+		_information_text = info;
 	}
 	
 	/**
@@ -72,7 +89,7 @@ public class Frage {
 	
 	/**
 	 * 
-	 * @return
+	 * @return information 
 	 */
 	public String getInformationText() {
 		return _information_text;

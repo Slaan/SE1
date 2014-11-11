@@ -1,8 +1,8 @@
-package entity;
+package simple_typen;
 
 import exceptions.UngueltigeEmailException;
 
-public class Email {
+public class EmailTyp {
 
 	private String _address;
 	
@@ -11,7 +11,7 @@ public class Email {
 	 * @param address of valid address
 	 * @throws UngueltigeEmailException when email has not valid format.
 	 */
-	public Email(String address) throws UngueltigeEmailException {
+	public EmailTyp(String address) throws UngueltigeEmailException {
 		if(address == null) throw new IllegalArgumentException();
 		if(!isValid(address)) {
 			String err_msg =  "Given email does not fit "
@@ -26,7 +26,7 @@ public class Email {
 	 * @param address
 	 * @throws UngueltigeEmailException
 	 */
-	public Email(Email address) throws UngueltigeEmailException {
+	public EmailTyp(EmailTyp address) throws UngueltigeEmailException {
 		if(address == null) throw new IllegalArgumentException();
 		if(!isValid(address.getAddress())) {
 			String err_msg =  "Given email does not fit "
@@ -58,10 +58,10 @@ public class Email {
 	public boolean equals(Object obj) {
 		if(obj == this) {
 			return true;
-		} else if(!(obj instanceof Email)) {
+		} else if(!(obj instanceof EmailTyp)) {
 			return false;
 		} else {
-			return _address.equals(((Email) obj).getAddress());
+			return _address.equals(((EmailTyp) obj).getAddress());
 		}
 	}
 	

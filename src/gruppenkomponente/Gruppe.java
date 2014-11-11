@@ -1,12 +1,15 @@
-package entity;
+package gruppenkomponente;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import benutzerkomponente.Nutzer;
+import simple_typen.UniqueID;
 import exceptions.GruppenErzeugerIstNullException;
 import exceptions.GruppenNamenIstNullException;
 import exceptions.KeineAnfrageVorhandenException;
 import exceptions.KeineRechteException;
+import fragekomponente.Frage;
 
 public class Gruppe {
 

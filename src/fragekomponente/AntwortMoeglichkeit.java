@@ -1,4 +1,4 @@
-package entity;
+package fragekomponente;
 
 public class AntwortMoeglichkeit {
 	
@@ -26,7 +26,7 @@ public class AntwortMoeglichkeit {
 		} else {
 			AntwortMoeglichkeit other = (AntwortMoeglichkeit) obj;
 			boolean a = _answer_text.equals(other.getAnswerText());
-			return a && _is_correct.equals(other.isCorrect());
+			return a && _is_correct.equals(other.istRichtig());
 		}
 	} 
 	
@@ -42,7 +42,7 @@ public class AntwortMoeglichkeit {
 	 * 
 	 * @return
 	 */
-	public Boolean isCorrect() {
+	public Boolean istRichtig() {
 		return _is_correct;
 	}
 }

@@ -1,9 +1,9 @@
 package component_interface;
 
-import entity.Frage;
-import entity.Nutzer;
+import benutzerkomponente.Nutzer;
 import exceptions.KeineAnfrageVorhandenException;
 import exceptions.KeineRechteException;
+import fragekomponente.Frage;
 
 public interface IGruppenKomponente {
 	
