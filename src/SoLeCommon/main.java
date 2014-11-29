@@ -6,6 +6,7 @@ import Fragekomponente.FrageKomponente;
 import Fragekomponente.IFrageKomponenteServices;
 import Gruppenkomponente.GruppenKomponente;
 import Gruppenkomponente.IGruppenkomponenteServices;
+import PersistenceKomponente.IPersistenceServices;
 
 public class main {	
 	IPersistenceServices ips = null; 

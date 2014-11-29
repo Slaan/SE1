@@ -17,7 +17,7 @@ public class AudioFrage extends Frage {
 																			UngueltigeAnwortAnzahlException,
 																			KeineKorrekteAntwortVorhandenException, 
 								LeereFragenException {
-		super(groupid, answer_option, frage_text);
+		super(frage_text, answer_option);
 		_audio = audio; 
 	}
 

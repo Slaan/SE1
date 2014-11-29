@@ -3,8 +3,6 @@ package Fragekomponente;
 import java.awt.Image;
 import java.util.Set;
 
-import javax.sound.sampled.AudioInputStream;
-
 import Exceptions.KeineKorrekteAntwortVorhandenException;
 import Exceptions.LeereFragenException;
 import Exceptions.UngueltigeAnwortAnzahlException;
@@ -18,10 +16,10 @@ public class BildFrage extends Frage {
 								UngueltigeAnwortAnzahlException,
 								KeineKorrekteAntwortVorhandenException, 
 								LeereFragenException {
-		super(groupid, answer_option, frage_text);
+		super(frage_text, answer_option);
 		_bild = bild;
 	}
-	
+		
 	/**
 	 * 
 	 */
