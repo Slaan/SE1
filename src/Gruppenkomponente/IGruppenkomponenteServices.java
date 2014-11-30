@@ -1,10 +1,15 @@
 package Gruppenkomponente;
 
+import java.sql.SQLException;
+import java.util.HashSet;
+
 import Benutzerkomponente.INutzer;
-import Benutzerkomponente.Nutzer;
 import Exceptions.KeineAnfrageVorhandenException;
+import Exceptions.KeineKorrekteAntwortVorhandenException;
 import Exceptions.KeineRechteException;
-import Fragekomponente.Frage;
+import Exceptions.LeereFragenException;
+import Exceptions.UngueltigeAnwortAnzahlException;
+import SoLeCommon.AntwortmoeglichkeitTyp;
 
 public interface IGruppenkomponenteServices {
 	
@@ -15,6 +20,14 @@ public interface IGruppenkomponenteServices {
 	 * @param passwort fuer Gruppenbeitritt
 	 */
 	public void erstelleGruppe(INutzer ersteller, String name, String passwort);
+	
+	/**
+	 * Ein Nutzer wählt eine Gruppe aus 
+	 * @param nutzer
+	 * @param GruppenID
+	 * @return Die ausgewählte Gruppe
+	 */
+	public IGruppe waehleGruppeAus(INutzer nutzer, Integer GruppenID) throws SQLException;
 	
 	/**
 	 * Nutzer tritt mittels Passwort einer Gruppe bei (A13)
@@ -61,7 +74,7 @@ public interface IGruppenkomponenteServices {
 	 * @param frage 
 	 * @throws KeineRechteException falls der nutzer nicht zur gruppe gehoert
 	 */
-	public void fuegeFrageHinzu(INutzer nutzer, Frage frage) 
-														throws KeineRechteException;
+	public void fuegeFrageHinzu(IGruppe gruppe, String frageText, HashSet<AntwortmoeglichkeitTyp> antworten) 
+														throws KeineRechteException, UngueltigeAnwortAnzahlException, KeineKorrekteAntwortVorhandenException, LeereFragenException;
 
 }

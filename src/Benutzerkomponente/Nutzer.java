@@ -1,7 +1,5 @@
 package Benutzerkomponente;
 
-import java.security.KeyStore.PasswordProtection;
-
 import SoLeCommon.EmailTyp;
 import SoLeCommon.UniqueID;
 

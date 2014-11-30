@@ -13,19 +13,17 @@ import SoLeCommon.UniqueID;
  * @author Alex Mantel, Daniel Hofmeister; Praktikumsgruppe 2
  *
  */
-public class Frage {
+public class Frage implements IFrage {
 
-	private Integer			  			_question_id;
-	private	Integer			  			_group_id;
-	private	String			  			_question_text;
+	private Integer			  				_question_id;
+	private	String			  				_question_text;
 	private	Set<AntwortmoeglichkeitTyp> 	_answer_options;
-	private String			 		  	_information_text;
+	private String			 		  		_information_text;
 	
-	public Frage(Integer groupid, Set<AntwortmoeglichkeitTyp> answer_option, String frage_text) throws 
+	public Frage(String frage_text, Set<AntwortmoeglichkeitTyp> answer_option) throws 
 							 UngueltigeAnwortAnzahlException, 
 							 KeineKorrekteAntwortVorhandenException, 
 							 LeereFragenException {
-		if(groupid == null) throw new NullPointerException();
 		if(answer_option == null) throw new NullPointerException();
 		if(frage_text == null) throw new NullPointerException();
 		_question_id = UniqueID.getUniqueId();
@@ -75,7 +73,7 @@ public class Frage {
 	 * 
 	 * @return
 	 */
-	public String getQuestionText() {
+	public String getFrageText() {
 		return _question_text;
 	}
 	
@@ -83,7 +81,7 @@ public class Frage {
 	 * 
 	 * @return
 	 */
-	public Set<AntwortmoeglichkeitTyp> getAnswerOptions() {
+	public Set<AntwortmoeglichkeitTyp> getAntworten() {
 		return _answer_options;
 	}
 	
@@ -91,7 +89,7 @@ public class Frage {
 	 * 
 	 * @return information 
 	 */
-	public String getInformationText() {
+	public String getInformationsText() {
 		return _information_text;
 	}
 	
@@ -103,10 +101,10 @@ public class Frage {
 			return false;
 		} else {
 			Frage other = (Frage) obj;
-			boolean a = _answer_options.equals(other.getAnswerOptions())
-					 && _information_text.equals(other.getInformationText())
+			boolean a = _answer_options.equals(other.getAntworten())
+					 && _information_text.equals(other.getInformationsText())
 					 && _question_id.equals(other.getQuestionID())
-					 && _question_text.equals(other.getQuestionText());
+					 && _question_text.equals(other.getFrageText());
 			return a;
 		}
 	}

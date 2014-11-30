@@ -4,13 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Benutzerkomponente.INutzer;
-import Benutzerkomponente.Nutzer;
 import Exceptions.KeineAnfrageVorhandenException;
 import Exceptions.KeineRechteException;
 import Fragekomponente.Frage;
+import Fragekomponente.IFrage;
 import SoLeCommon.UniqueID;
 
-public class Gruppe {
+class Gruppe implements IGruppe {
 
 	private	Integer			_groupid;
 	private	String			_name;
@@ -18,7 +18,7 @@ public class Gruppe {
 	private	Set<INutzer> 	_moderatoren;
 	private	Set<INutzer> 	_nutzer;
 	private	Set<INutzer>	_ausstehende_nutzer;
-	private Set<Frage> 		_fragen; 
+	private Set<IFrage> 	_fragen; 
 	
 	/**
 	 * Erzeugt eine neue Gruppe (A12)
@@ -39,6 +39,20 @@ public class Gruppe {
 		_fragen 		= new HashSet<>();
 		_moderatoren 	= new HashSet<>();
 		_moderatoren.add(erzeuger);
+		_nutzer 		= new HashSet<>();
+		_nutzer.add(erzeuger);
+	}
+	
+	public Gruppe(Integer ID, String gruppenName, String passwort, HashSet<INutzer> moderatoren,  
+					HashSet<INutzer> nutzer, HashSet<INutzer> ausstehendeNutzer, HashSet<IFrage> fragen) {
+		
+		_ausstehende_nutzer = ausstehendeNutzer;
+		_groupid = ID;
+		_passwort = passwort;
+		_name = gruppenName;
+		_fragen = fragen;
+		_moderatoren = moderatoren;
+		_nutzer = nutzer;
 	}
 
 	/**
@@ -72,7 +86,7 @@ public class Gruppe {
 	 * @throws KeineRechteException 
 	 * @throws KeineAnfrageVorhandenException 
 	 */
-	public void beschaetigeAnfrage(INutzer moderator, INutzer anfragesteller) 
+	public void bestaetigeAnfrage(INutzer moderator, INutzer anfragesteller) 
 													throws 	KeineRechteException, 
 															KeineAnfrageVorhandenException {
 		if(moderator == null) throw new NullPointerException("moderator ist null");
@@ -128,7 +142,7 @@ public class Gruppe {
 	 * @param frage 
 	 * @throws KeineRechteException falls der nutzer nicht zur gruppe gehoert
 	 */
-	public void fuegeFrageHinzu(INutzer nutzer, Frage frage) throws KeineRechteException {
+	public void fuegeFrageHinzu(INutzer nutzer, IFrage frage) throws KeineRechteException {
 		if(nutzer == null) throw new NullPointerException("nutzer ist null");
 		if(frage == null) throw new NullPointerException("frage ist null");
 		if(!_nutzer.contains(nutzer)) {
@@ -145,4 +159,15 @@ public class Gruppe {
 		return _name;
 	}
 	
+	public Integer getGroupID() {
+		return _groupid;
+	}
+	
+	public Set<INutzer> getNutzer() {
+		return _nutzer;
+	}
+	
+	public Set<IFrage> getFragen() {
+		return _fragen;
+	}
 }

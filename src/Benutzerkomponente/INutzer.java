@@ -21,4 +21,11 @@ public interface INutzer {
 	 * @return email address of user
 	 */
 	public EmailTyp getEmail();
+	
+	/**
+	 * Überprüft, ob zwei Objekte gleich sind
+	 * @param o
+	 * @return wahr oder falsch, je nachdem ob sie gleich sind.
+	 */
+	public boolean equals(Object o);
 }
