@@ -27,11 +27,9 @@ class Gruppe implements IGruppe {
 	 * @throws GruppenNamenIstNullException
 	 * @throws GruppenErzeugerIstNullException
 	 */
-	public Gruppe(INutzer erzeuger, String name, String passwort) throws 	
-														GruppenNamenIstNullException, 
-														GruppenErzeugerIstNullException {
-		if(name == null) 	 throw new GruppenNamenIstNullException();
-		if(erzeuger == null) throw new GruppenErzeugerIstNullException();
+	public Gruppe(INutzer erzeuger, String name, String passwort) {
+		if(name == null) 	 throw new IllegalArgumentException();
+		if(erzeuger == null) throw new IllegalArgumentException();
 		_ausstehende_nutzer = new HashSet<>();
 		_groupid 		= UniqueID.getUniqueId();
 		_passwort 		= passwort;
@@ -89,8 +87,8 @@ class Gruppe implements IGruppe {
 	public void bestaetigeAnfrage(INutzer moderator, INutzer anfragesteller) 
 													throws 	KeineRechteException, 
 															KeineAnfrageVorhandenException {
-		if(moderator == null) throw new NullPointerException("moderator ist null");
-		if(anfragesteller == null) throw new NullPointerException("anfragesteller ist null");
+		if(moderator == null) throw new IllegalArgumentException("moderator ist null");
+		if(anfragesteller == null) throw new IllegalArgumentException("anfragesteller ist null");
 		if(!_moderatoren.contains(moderator)) {
 			throw new KeineRechteException("Der angegebe Moderator ist keiner");
 		}
@@ -110,8 +108,8 @@ class Gruppe implements IGruppe {
 	public void weiseAnfrageAb(INutzer moderator, INutzer anfragesteller) 
 													throws 	KeineRechteException, 
 															KeineAnfrageVorhandenException {
-		if(moderator == null) throw new NullPointerException("moderator ist null");
-		if(anfragesteller == null) throw new NullPointerException("anfragesteller ist null");
+		if(moderator == null) throw new IllegalArgumentException("moderator ist null");
+		if(anfragesteller == null) throw new IllegalArgumentException("anfragesteller ist null");
 		if(!_moderatoren.contains(moderator)) {
 			throw new KeineRechteException("Der angegebe Moderator ist keiner");
 		}
@@ -128,7 +126,7 @@ class Gruppe implements IGruppe {
 	 */
 	public void fuegeModeratorHinzu(INutzer moderator, INutzer nutzer) 
 													throws KeineRechteException {
-		if(moderator == null) 	throw new NullPointerException("Moderator ist null");
+		if(moderator == null) 	throw new IllegalArgumentException("Moderator ist null");
 		if(nutzer == null) 		throw new NullPointerException("Nutzer ist null");
 		if(!_moderatoren.contains(moderator)) {
 			throw new KeineRechteException("Der angegebe Moderator ist keiner");
@@ -143,8 +141,8 @@ class Gruppe implements IGruppe {
 	 * @throws KeineRechteException falls der nutzer nicht zur gruppe gehoert
 	 */
 	public void fuegeFrageHinzu(INutzer nutzer, IFrage frage) throws KeineRechteException {
-		if(nutzer == null) throw new NullPointerException("nutzer ist null");
-		if(frage == null) throw new NullPointerException("frage ist null");
+		if(nutzer == null) throw new IllegalArgumentException("nutzer ist null");
+		if(frage == null) throw new IllegalArgumentException("frage ist null");
 		if(!_nutzer.contains(nutzer)) {
 			throw new KeineRechteException("Der angebene Nutzer gehoert nicht zur Gruppe");
 		}

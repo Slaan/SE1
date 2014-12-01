@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
@@ -11,8 +13,10 @@ import org.junit.Test;
 
 import Benutzerkomponente.IBenutzerKomponenteServices;
 import Benutzerkomponente.INutzer;
+import Exceptions.GruppeNichtVorhandenException;
 import Exceptions.InvalideFrageException;
 import Exceptions.KeineKorrekteAntwortVorhandenException;
+import Exceptions.KeineRechteException;
 import Exceptions.LeereFragenException;
 import Exceptions.NameBereitsVergebenException;
 import Exceptions.NameZuKurzException;
@@ -23,6 +27,7 @@ import Fragekomponente.IFrage;
 import Fragekomponente.IFrageKomponenteServices;
 import Gruppenkomponente.GruppenKomponente;
 import Gruppenkomponente.IGruppe;
+import Gruppenkomponente.IGruppenkomponenteFuerTestsServices;
 import Gruppenkomponente.IGruppenkomponenteServices;
 import PersistenceKomponente.IPersistenceServices;
 import SoLeCommon.AntwortmoeglichkeitTyp;
@@ -35,11 +40,29 @@ public class GruppenKomponenteTest {
 	private	IBenutzerKomponenteServices _ibs;
 	private IGruppenkomponenteServices 	_igk;
 	
+	private INutzer nutzer;
+	
 	@Before
 	public void setUp() {
+		nutzer = new INutzer() {
+			
+			@Override
+			public Integer getUserID() {
+				return 0;
+			}
+			
+			@Override
+			public String getNickname() {
+				return "testuser";
+			}
+			
+			@Override
+			public EmailTyp getEmail() {
+				return null;
+			}
+		};
 		// dummy komponenten
 		_ips = new IPersistenceServices() {
-			
 			@Override
 			public void speicherFrage(IGruppe gruppe, IFrage frage) {
 				System.out.println("Persistence: Speichere in " + gruppe + ", " + frage);
@@ -70,7 +93,7 @@ public class GruppenKomponenteTest {
 				return new IFrage() {
 					@Override
 					public String getInformationsText() {
-						return "no info.";
+						return "";
 					}
 					
 					@Override
@@ -99,12 +122,15 @@ public class GruppenKomponenteTest {
 				throw new UnsupportedOperationException();
 			}
 		};
-		_igk = new GruppenKomponente(_ips, _ifs, _ibs); 
+		_igk = new GruppenKomponente(_ips, _ifs, _ibs);
+		_igk.erstelleGruppe(nutzer, "test", "123");
 	}
 	
 	@Test
-	public void test() {
-		
+	public void testFuegeFrageHinzu() throws 	UngueltigeAnwortAnzahlException, 
+												KeineKorrekteAntwortVorhandenException, 
+												LeereFragenException {
+
 	}
 
 }

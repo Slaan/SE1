@@ -3,6 +3,9 @@ package Fragekomponente;
 import java.util.Set;
 
 import Exceptions.InvalideFrageException;
+import Exceptions.KeineKorrekteAntwortVorhandenException;
+import Exceptions.LeereFragenException;
+import Exceptions.UngueltigeAnwortAnzahlException;
 import Gruppenkomponente.IGruppenkomponenteServices;
 import PersistenceKomponente.IPersistenceServices;
 import SoLeCommon.AntwortmoeglichkeitTyp;
@@ -17,9 +20,10 @@ public class FrageKomponente implements IFrageKomponenteServices  {
 	}
 
 	@Override
-	public IFrage erstelleTextFrage(String fragetext,
-			Set<AntwortmoeglichkeitTyp> antworten)
-			throws InvalideFrageException {
+	public IFrage erstelleTextFrage(String fragetext, Set<AntwortmoeglichkeitTyp> antworten)
+			throws 	UngueltigeAnwortAnzahlException, 
+					KeineKorrekteAntwortVorhandenException, 
+					LeereFragenException {
 				return null;
 	}
 

@@ -19,8 +19,8 @@ public interface IFrageKomponenteServices {
 	 * diesen nicht mindestens eine korrekt ist oder der frageText null ist.
 	 */
 	public IFrage erstelleTextFrage(String fragetext, Set<AntwortmoeglichkeitTyp> antworten) 
-															throws UngueltigeAnwortAnzahlException, 
-															KeineKorrekteAntwortVorhandenException, 
-															LeereFragenException;
+															throws 	UngueltigeAnwortAnzahlException, 
+																	KeineKorrekteAntwortVorhandenException, 
+																	LeereFragenException;
 ;
 }

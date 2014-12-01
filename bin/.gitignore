@@ -1,6 +1,7 @@
-/Tests/
-/Exceptions/
 /Benutzerkomponente/
-/SoLeCommon/
+/Exceptions/
 /Fragekomponente/
 /Gruppenkomponente/
+/PersistenceKomponente/
+/SoLeCommon/
+/Tests/

@@ -4,12 +4,11 @@ import java.sql.SQLException;
 import java.util.Set;
 
 import Benutzerkomponente.INutzer;
+import Exceptions.GruppeNichtVorhandenException;
 import Exceptions.InvalideFrageException;
 import Exceptions.KeineAnfrageVorhandenException;
-import Exceptions.KeineKorrekteAntwortVorhandenException;
 import Exceptions.KeineRechteException;
-import Exceptions.LeereFragenException;
-import Exceptions.UngueltigeAnwortAnzahlException;
+import Fragekomponente.IFrage;
 import SoLeCommon.AntwortmoeglichkeitTyp;
 
 public interface IGruppenkomponenteServices {
@@ -28,7 +27,7 @@ public interface IGruppenkomponenteServices {
 	 * @param GruppenID
 	 * @return Die ausgew��hlte Gruppe
 	 */
-	public IGruppe waehleGruppeAus(INutzer nutzer, Integer GruppenID) throws SQLException;
+	public IGruppe waehleGruppeAus(INutzer nutzer, Integer GruppenID);
 	
 	/**
 	 * Nutzer tritt mittels Passwort einer Gruppe bei (A13)
@@ -71,13 +70,14 @@ public interface IGruppenkomponenteServices {
 	
 	/**
 	 * Fuegt eine Frage in der Gruppe hinzu
-	 * @param gruppe in welche die Frage eingetragen werden soll
-	 * @param fragetext fuer die neue Frage
-	 * @param antworten genau vier antwortmoeglichkeiten von der mindestens eine korrekt sein muss!
+	 * @param nutzer welcher die frage hinzufuegt
+	 * @param gruppenname in welche die Frage eingetragen werden soll
+	 * @param frage welche der gruppe hinzugefuegt werden soll
 	 * @throws KeineRechteException falls der nutzer nicht zur gruppe gehoert
 	 */
-	public void fuegeFrageHinzu(IGruppe gruppe, String frageText, Set<AntwortmoeglichkeitTyp> antworten) 
+	public void fuegeFrageHinzu(INutzer nutzer, String gruppe, String Fragetext, 
+												Set<AntwortmoeglichkeitTyp> antworten) 
 														throws 	KeineRechteException,
-																InvalideFrageException;
-																
+																InvalideFrageException,
+																GruppeNichtVorhandenException;
 }
