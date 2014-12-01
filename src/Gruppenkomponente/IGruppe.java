@@ -32,7 +32,7 @@ public interface IGruppe {
 	public Set<IFrage> getFragen();
 	
 	/**
-	 * Überprüft, ob zwei Objekte gleich sind
+	 * Uewberprueft, ob zwei Objekte gleich sind
 	 * @param o
 	 * @return wahr oder falsch, je nachdem ob sie gleich sind.
 	 */

@@ -65,4 +65,9 @@ public class EmailTyp {
 		}
 	}
 	
+	@Override
+	public String toString() {
+		return "Email(" + _address + ")";
+	}
+	
 }

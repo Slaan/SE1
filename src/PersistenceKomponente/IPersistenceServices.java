@@ -6,15 +6,26 @@ import Benutzerkomponente.INutzer;
 import Fragekomponente.IFrage;
 import Gruppenkomponente.IGruppe;
 
+/**
+ * Presistenzschicht
+ *
+ */
 public interface IPersistenceServices {
 	
 	
 	/**
-	 * Legt einen neuen Datenbankeintrag für einen neuen Nutzer an.
+	 * Legt einen neuen Datenbankeintrag f��r einen neuen Nutzer an.
 	 * @param neuerNutzer Zu speichernder Nutzer
 	 * @return 
 	 */
 	void nutzerSpeichern(INutzer neuerNutzer);
+	
+	/**
+	 * Speichert eine Frage f��r eine Gruppe
+	 * @param gruppe Gruppe f��r die die Frage erstellt wurde
+	 * @param frage Frage die gespeichert werden soll
+	 */
+	void speicherFrage(IGruppe gruppe, IFrage frage);
 	
 	/**
 	 * Logged den Nutzer ein
@@ -30,11 +41,4 @@ public interface IPersistenceServices {
 	 * @return Gruppendaten
 	 */
 	ResultSet getGruppe(Integer gruppeID);
-	
-	/**
-	 * Speichert eine Frage für eine Gruppe
-	 * @param gruppe Gruppe für die die Frage erstellt wurde
-	 * @param frage Frage die gespeichert werden soll
-	 */
-	void speicherFrage(IGruppe gruppe, IFrage frage);
 }

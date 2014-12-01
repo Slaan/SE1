@@ -17,11 +17,10 @@ public class FrageKomponente implements IFrageKomponenteServices  {
 	}
 
 	@Override
-	public void erstelleTextFrage(String fragetext,
+	public IFrage erstelleTextFrage(String fragetext,
 			Set<AntwortmoeglichkeitTyp> antworten)
 			throws InvalideFrageException {
-		// TODO Auto-generated method stub
-		
+				return null;
 	}
 
 

@@ -1,9 +1,10 @@
 package Gruppenkomponente;
 
 import java.sql.SQLException;
-import java.util.HashSet;
+import java.util.Set;
 
 import Benutzerkomponente.INutzer;
+import Exceptions.InvalideFrageException;
 import Exceptions.KeineAnfrageVorhandenException;
 import Exceptions.KeineKorrekteAntwortVorhandenException;
 import Exceptions.KeineRechteException;
@@ -22,10 +23,10 @@ public interface IGruppenkomponenteServices {
 	public void erstelleGruppe(INutzer ersteller, String name, String passwort);
 	
 	/**
-	 * Ein Nutzer wählt eine Gruppe aus 
+	 * Ein Nutzer w��hlt eine Gruppe aus 
 	 * @param nutzer
 	 * @param GruppenID
-	 * @return Die ausgewählte Gruppe
+	 * @return Die ausgew��hlte Gruppe
 	 */
 	public IGruppe waehleGruppeAus(INutzer nutzer, Integer GruppenID) throws SQLException;
 	
@@ -70,11 +71,13 @@ public interface IGruppenkomponenteServices {
 	
 	/**
 	 * Fuegt eine Frage in der Gruppe hinzu
-	 * @param nutzer welcher mitglied der gruppe ist
-	 * @param frage 
+	 * @param gruppe in welche die Frage eingetragen werden soll
+	 * @param fragetext fuer die neue Frage
+	 * @param antworten genau vier antwortmoeglichkeiten von der mindestens eine korrekt sein muss!
 	 * @throws KeineRechteException falls der nutzer nicht zur gruppe gehoert
 	 */
-	public void fuegeFrageHinzu(IGruppe gruppe, String frageText, HashSet<AntwortmoeglichkeitTyp> antworten) 
-														throws KeineRechteException, UngueltigeAnwortAnzahlException, KeineKorrekteAntwortVorhandenException, LeereFragenException;
-
+	public void fuegeFrageHinzu(IGruppe gruppe, String frageText, Set<AntwortmoeglichkeitTyp> antworten) 
+														throws 	KeineRechteException,
+																InvalideFrageException;
+																
 }

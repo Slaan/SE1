@@ -1,5 +1,7 @@
 package Benutzerkomponente;
 
+import Exceptions.NameZuKurzException;
+import Exceptions.PasswortZuKurzException;
 import SoLeCommon.EmailTyp;
 import SoLeCommon.UniqueID;
 
@@ -14,13 +16,19 @@ public class Nutzer implements INutzer {
 	 * Create user (A1)
 	 * @param nickname is the name of user
 	 * @param email of the user.
+	 * @throws NameZuKurzException 
+	 * @throws PasswortZuKurzException 
 	 */
-	public Nutzer(String nickname, String password, EmailTyp email) {
-		if(nickname == null) throw new IllegalArgumentException("Nickname is null.");
-		if(password == null) throw new IllegalArgumentException("Password is null");
-		if(email == null) throw new IllegalArgumentException("Email is null.");
-		_id = UniqueID.getUniqueId();
-		_nickname = nickname;
+	public Nutzer(String nickname, String password, EmailTyp email) throws NameZuKurzException, PasswortZuKurzException {
+		if(nickname == null) 		throw new IllegalArgumentException("Nickname is null.");
+		if(password == null) 		throw new IllegalArgumentException("Password is null");
+		if(email == null) 			throw new IllegalArgumentException("Email is null.");
+		if(nickname.length() < 3)	throw new NameZuKurzException();
+		if(password.length() < 3)	throw new PasswortZuKurzException();
+		_id 		= UniqueID.getUniqueId();
+		_nickname 	= nickname;
+		_password 	= password;
+		_email		= email;
 	}
 	
 	/**
@@ -69,4 +77,12 @@ public class Nutzer implements INutzer {
 				+ (_email.hashCode() * 31);
 	}
 	
+	@Override
+	public String toString() {
+		return 		"Nutzer(" 	+ _id 
+				+	", "		+ _nickname
+				+	", "		+ _password.hashCode()
+				+	", "		+ _email.toString()
+				+	")";
+	}
 }
