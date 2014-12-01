@@ -27,7 +27,6 @@ import Fragekomponente.IFrage;
 import Fragekomponente.IFrageKomponenteServices;
 import Gruppenkomponente.GruppenKomponente;
 import Gruppenkomponente.IGruppe;
-import Gruppenkomponente.IGruppenkomponenteFuerTestsServices;
 import Gruppenkomponente.IGruppenkomponenteServices;
 import PersistenceKomponente.IPersistenceServices;
 import SoLeCommon.AntwortmoeglichkeitTyp;
@@ -130,7 +129,25 @@ public class GruppenKomponenteTest {
 	public void testFuegeFrageHinzu() throws 	UngueltigeAnwortAnzahlException, 
 												KeineKorrekteAntwortVorhandenException, 
 												LeereFragenException {
-
+		Set<AntwortmoeglichkeitTyp> antworten = new HashSet<>();
+		for(Integer i : Arrays.asList(1,2,3)) {
+			antworten.add(new AntwortmoeglichkeitTyp(i.toString(), false));
+		}
+		antworten.add(new AntwortmoeglichkeitTyp("4", true));
+		IFrage frage = _ifs.erstelleTextFrage("2+2?", antworten);
+		try {
+			_igk.fuegeFrageHinzu(nutzer, "testusertest", "2+2?", antworten);
+		} catch (KeineRechteException | InvalideFrageException
+				| GruppeNichtVorhandenException e) {
+			e.printStackTrace();
+			fail("Exception raised by adding question");
+		}
+		try {
+			Set<IFrage> fragen = _igk.fragenInGruppe("testusertest");
+			assertTrue(fragen.contains(frage));
+		} catch(GruppeNichtVorhandenException e) {
+			fail("Exception raised by looking for group questions");
+		}
 	}
 
 }

@@ -51,4 +51,9 @@ public class AntwortmoeglichkeitTyp {
 	public Boolean istRichtig() {
 		return _is_correct;
 	}
+	
+	@Override
+	public String toString() {
+		return "AntwortmoeglichkeitTyp(" + _answer_text + ", " + Boolean.valueOf(_is_correct) + ")";
+	}
 }

@@ -36,8 +36,8 @@ class Gruppe implements IGruppe {
 		_name 			= erzeuger.getNickname() + name;
 		_fragen 		= new HashSet<>();
 		_moderatoren 	= new HashSet<>();
-		_moderatoren.add(erzeuger);
 		_nutzer 		= new HashSet<>();
+		_moderatoren.add(erzeuger);
 		_nutzer.add(erzeuger);
 	}
 	

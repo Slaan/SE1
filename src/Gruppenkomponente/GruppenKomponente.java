@@ -109,12 +109,19 @@ public class GruppenKomponente implements IGruppenkomponenteServices {
 		}
 		try {
 			IFrage frage = _ifks.erstelleTextFrage(fragetext, antworten);
+			gruppe.fuegeFrageHinzu(nutzer, frage);
 			_ips.speicherFrage(gruppe, frage);
 		} catch (UngueltigeAnwortAnzahlException
 				| KeineKorrekteAntwortVorhandenException | LeereFragenException e) {
 			throw new InvalideFrageException();
 		}
 		
+	}
+	
+	@Override
+	public Set<IFrage> fragenInGruppe(String gruppenname) throws GruppeNichtVorhandenException {
+		Gruppe gefundende_gruppe = findeGruppe(gruppenname);
+		return gefundende_gruppe.getFragen();
 	}
 	
 	/**

@@ -80,4 +80,10 @@ public interface IGruppenkomponenteServices {
 														throws 	KeineRechteException,
 																InvalideFrageException,
 																GruppeNichtVorhandenException;
+	
+	/** 
+	 * @param gruppenname
+	 * @return alle Fragen welche in einer Gruppe vorhanden sind.
+	 */
+	public Set<IFrage> fragenInGruppe(String gruppenname) throws GruppeNichtVorhandenException;
 }
