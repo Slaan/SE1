@@ -56,6 +56,11 @@ public class Nutzer implements INutzer {
 	}
 	
 	@Override
+	public String getPassword() {
+		return _password;
+	}
+	
+	@Override
 	public boolean equals(Object obj) {
 		if(this == obj) {
 			return true;

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/Benutzerkomponente/INutzer.java=UTF-8
 encoding//src/Fragekomponente/IFrage.java=UTF-8
 encoding//src/Gruppenkomponente/IGruppenkomponenteServices.java=UTF-8
 encoding//src/PersistenceKomponente/IPersistenceServices.java=UTF-8

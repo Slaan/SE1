@@ -18,12 +18,18 @@ public interface INutzer {
 	
 	/**
 	 * 
+	 * @return password of user
+	 */
+	public String getPassword();
+	
+	/**
+	 * 
 	 * @return email address of user
 	 */
 	public EmailTyp getEmail();
 	
 	/**
-	 * Überprüft, ob zwei Objekte gleich sind
+	 * Ueberprueft, ob zwei Objekte gleich sind
 	 * @param o
 	 * @return wahr oder falsch, je nachdem ob sie gleich sind.
 	 */

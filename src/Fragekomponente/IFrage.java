@@ -8,6 +8,12 @@ public interface IFrage {
 	
 	/**
 	 * 
+	 * @return id
+	 */
+	public Integer getFragenummer();
+	
+	/**
+	 * 
 	 * @return Fragetext
 	 */
 	public String getFrageText();

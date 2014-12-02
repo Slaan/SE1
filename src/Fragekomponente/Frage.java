@@ -124,4 +124,9 @@ public class Frage implements IFrage {
 			   ", "		+ _answer_options + ")";		
 	}
 
+	@Override
+	public Integer getFragenummer() {
+		return _question_id;
+	}
+
 }

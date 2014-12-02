@@ -2,6 +2,7 @@ package SoLeCommon;
 
 public class AntwortmoeglichkeitTyp {
 	
+	private Integer	_id;
 	private String 	_answer_text;
 	private	Boolean	_is_correct;
 	
@@ -13,14 +14,16 @@ public class AntwortmoeglichkeitTyp {
 	public AntwortmoeglichkeitTyp(String answer_text, Boolean is_correct) {
 		if(answer_text == null) throw new IllegalArgumentException("Antworttext darf nicht leer sein.");
 		if(is_correct == null) throw new IllegalArgumentException("Der Wahrheitswert muss gesetzt werden.");
-		_answer_text = answer_text;
-		_is_correct = is_correct;
+		_answer_text 	= answer_text;
+		_is_correct 	= is_correct;
+		_id				= UniqueID.getUniqueId();
 	}
 	
 	public AntwortmoeglichkeitTyp(AntwortmoeglichkeitTyp andereAntwortmoeglichkeit) {
 		if(andereAntwortmoeglichkeit == null) throw new IllegalArgumentException();
 		_answer_text 	= andereAntwortmoeglichkeit.getAnswerText();
 		_is_correct		= andereAntwortmoeglichkeit.istRichtig();
+		_id				= UniqueID.getUniqueId();
 	}
 	
 	@Override
@@ -35,6 +38,10 @@ public class AntwortmoeglichkeitTyp {
 			return a && _is_correct.equals(other.istRichtig());
 		}
 	} 
+	
+	public Integer getAntwortmoeglichkeitID() {
+		return _id;
+	}
 	
 	/**
 	 * 
