@@ -14,7 +14,7 @@ public interface IFrage {
 	
 	/**
 	 * 
-	 * @return Set der Antwortmöglichkiten
+	 * @return Set der Antwortmoeglichkiten
 	 */
 	public Set<AntwortmoeglichkeitTyp> getAntworten();
 	
@@ -25,10 +25,15 @@ public interface IFrage {
 	public String getInformationsText();
 	
 	/**
-	 * Überprüft, ob zwei Objekte gleich sind
+	 * ueberprueft, ob zwei Objekte gleich sind
 	 * @param o
 	 * @return wahr oder falsch, je nachdem ob sie gleich sind.
 	 */
 	public boolean equals(Object o);
 	
+	/**
+	 * Typical toString method
+	 * @return a string containing all values
+	 */
+	public String toString();
 }

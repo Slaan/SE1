@@ -101,21 +101,20 @@ public class Frage implements IFrage {
 			return false;
 		} else {
 			Frage other = (Frage) obj;
-			//boolean a = _answer_options.equals(other.getAntworten())
-					 return _information_text.equals(other.getInformationsText());
+			return 		_answer_options.equals(other.getAntworten())
+					 && _information_text.equals(other.getInformationsText())
 //					 && _question_id.equals(other.getQuestionID())
-//					 && _question_text.equals(other.getFrageText());
+					 && _question_text.equals(other.getFrageText());
 //			return a;
 		}
 	}
 	
 	@Override
 	public int hashCode() {
-		return (31 * _question_id) 
-		      +(31 * _question_text.hashCode() )
+//		(31 * _question_id) 
+		return (31 * _question_text.hashCode() )
 			  +(31 * _answer_options.hashCode())
-		      +(31 * _information_text.hashCode())
-		      +(31 * _question_text.hashCode());
+		      +(31 * _information_text.hashCode());
 	}
 	
 	@Override

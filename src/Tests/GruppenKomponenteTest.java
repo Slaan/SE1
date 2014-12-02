@@ -1,11 +1,13 @@
 package Tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.Before;
@@ -31,6 +33,83 @@ import Gruppenkomponente.IGruppenkomponenteServices;
 import PersistenceKomponente.IPersistenceServices;
 import SoLeCommon.AntwortmoeglichkeitTyp;
 import SoLeCommon.EmailTyp;
+
+/**
+ * Dummy Frageklasse
+ * @author alex
+ */
+class Frage implements IFrage {
+
+	private String 						_question_text;
+	private String						_information_text;
+	private Set<AntwortmoeglichkeitTyp>	_answer_options;
+	
+	public Frage(String frage_text, Set<AntwortmoeglichkeitTyp> answer_option) throws 
+												 UngueltigeAnwortAnzahlException, 
+												 KeineKorrekteAntwortVorhandenException {
+		if(answer_option == null) throw new NullPointerException();
+		if(frage_text == null) throw new NullPointerException();
+		_question_text = frage_text;
+		_answer_options = answer_option;
+		isValid();
+	}
+	
+	private void isValid() throws 	UngueltigeAnwortAnzahlException, 
+									KeineKorrekteAntwortVorhandenException {
+		if(_answer_options.size() != 4) throw new UngueltigeAnwortAnzahlException();
+		// check that there is at least one
+		// correct answer
+		boolean accu = false;
+		for(AntwortmoeglichkeitTyp answer : _answer_options) {
+				accu = accu || answer.istRichtig();
+		}
+		if(!accu) throw new KeineKorrekteAntwortVorhandenException();
+		// check questiontext
+	}
+	 
+	/**
+	 * 
+	 * @return
+	 */
+	public String getFrageText() {
+		return _question_text;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Set<AntwortmoeglichkeitTyp> getAntworten() {
+		return _answer_options;
+	}
+	
+	/**
+	 * 
+	 * @return information 
+	 */
+	public String getInformationsText() {
+		return _information_text;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) {
+			return true;
+		} else if(!(obj instanceof Frage)) {
+			return false;
+		} else {
+			Frage other = (Frage) obj;
+			return 		_answer_options.equals(other.getAntworten())
+					 && _question_text.equals(other.getFrageText());
+		}
+	}
+	
+	@Override
+	public int hashCode() { 
+		return (31 * _question_text.hashCode() )
+			  +(31 * _answer_options.hashCode());
+	}
+}
 
 public class GruppenKomponenteTest {
 
@@ -89,22 +168,7 @@ public class GruppenKomponenteTest {
 					Set<AntwortmoeglichkeitTyp> antworten)
 					throws UngueltigeAnwortAnzahlException,
 					KeineKorrekteAntwortVorhandenException, LeereFragenException {
-				return new IFrage() {
-					@Override
-					public String getInformationsText() {
-						return "";
-					}
-					
-					@Override
-					public String getFrageText() {
-						return fragetext;
-					}
-					
-					@Override
-					public Set<AntwortmoeglichkeitTyp> getAntworten() {
-						return antworten;
-					}
-				};
+				return new Frage(fragetext, antworten);
 			}
 		};
 		_ibs = new IBenutzerKomponenteServices() {
@@ -144,10 +208,66 @@ public class GruppenKomponenteTest {
 		}
 		try {
 			Set<IFrage> fragen = _igk.fragenInGruppe("testusertest");
-			assertTrue(fragen.contains(frage));
+			Iterator<IFrage> f = fragen.iterator();
+			IFrage i = f.next();
+			assertTrue(i.equals(frage));
 		} catch(GruppeNichtVorhandenException e) {
 			fail("Exception raised by looking for group questions");
 		}
+	}
+	
+	@Test(expected = InvalideFrageException.class)
+	public void testFuegeFrageHinzuMitUngueltigerAntwortZahl() throws 	KeineRechteException, 
+																		InvalideFrageException, 
+																		GruppeNichtVorhandenException {
+		Set<AntwortmoeglichkeitTyp> antworten = new HashSet<>();
+		for(Integer i : Arrays.asList(1,2,3,4,6)) {
+			antworten.add(new AntwortmoeglichkeitTyp(i.toString(), false));
+		}
+		antworten.add(new AntwortmoeglichkeitTyp("4", true));
+		_igk.fuegeFrageHinzu(nutzer, "testusertest", "2+2?", antworten);
+		
+	}
+	
+	@Test(expected = GruppeNichtVorhandenException.class) 
+	public void testFuegeFrageHinzuMitNichtVorhandenerGruppe() throws 	KeineRechteException, 
+																		InvalideFrageException, 
+																		GruppeNichtVorhandenException {
+		Set<AntwortmoeglichkeitTyp> antworten = new HashSet<>();
+		for(Integer i : Arrays.asList(1,2,3,4)) {
+			antworten.add(new AntwortmoeglichkeitTyp(i.toString(), false));
+		}
+		antworten.add(new AntwortmoeglichkeitTyp("4", true));
+		_igk.fuegeFrageHinzu(nutzer, "pferdegruppe", "2+2?", antworten);
+	}
+	
+	@Test(expected = KeineRechteException.class)
+	public void testFuegeFrageHinzuOhneMitgliedZuSein() throws 	KeineRechteException, 
+																InvalideFrageException, 
+																GruppeNichtVorhandenException {
+		nutzer = new INutzer() {
+			
+			@Override
+			public Integer getUserID() {
+				return 5;
+			}
+			
+			@Override
+			public String getNickname() {
+				return "testuser2";
+			}
+			
+			@Override
+			public EmailTyp getEmail() {
+				return null;
+			}
+		};
+		Set<AntwortmoeglichkeitTyp> antworten = new HashSet<>();
+		for(Integer i : Arrays.asList(1,2,3,4)) {
+			antworten.add(new AntwortmoeglichkeitTyp(i.toString(), false));
+		}
+		antworten.add(new AntwortmoeglichkeitTyp("4", true));
+		_igk.fuegeFrageHinzu(nutzer, "testusertest", "2+2?", antworten);
 	}
 
 }
